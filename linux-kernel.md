@@ -1,12 +1,12 @@
-#linux内存管理
+# linux内存管理
 
-##Linux虚拟地址空间布局
+## Linux虚拟地址空间布局
 
 ![img](270929306664122.jpg)
 
 参考： [Linux虚拟地址空间布局](http://www.cnblogs.com/clover-toeic/p/3754433.html)
 
-##Linux虚拟地址到物理地址的映射（页表）
+## Linux虚拟地址到物理地址的映射（页表）
 
 1. linux如何完成虚拟地址到物理地址的映射
 
@@ -42,9 +42,9 @@
 
 
 
-##GLIBC malloc 实现分析
+## GLIBC malloc 实现分析
 
-##TCMallco 实现分析
+## TCMallco 实现分析
 
 [图解TCMalloc](https://zhuanlan.zhihu.com/p/29216091) golang中自己实现一套tcmalloc的实现；
 
@@ -176,7 +176,7 @@ mmap是一中内存映射文件的方法，即将一个文件或者其它对象�
 
 
 
-#linux进程管理
+# linux进程管理
 
 ## 进程调度
 
@@ -364,7 +364,7 @@ linux进程分为3类：
 
 
 
-##fork与锁安全
+## fork与锁安全
 
 [程序员的自我修养（三）：fork() 安全](https://liam0205.me/2017/01/17/fork-safe/)
 
@@ -396,9 +396,9 @@ linux进程分为3类：
 
 
 
-#linux定时管理
+# linux定时管理
 
-##定时器与时间管理
+## 定时器与时间管理
 
 **内核中的时间概念**
 
