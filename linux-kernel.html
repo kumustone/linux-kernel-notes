@@ -1,0 +1,937 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>linux-kernel</title><link href='http://fonts.googleapis.com/css?family=Roboto+Mono:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}#write, body { height: auto; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write ol, #write p, #write ul { position: relative; }
+#write, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write, pre { white-space: pre-wrap; }
+.CodeMirror, .md-fences, table { text-align: left; }
+.md-reset, a:active, a:hover { outline: 0px; }
+.md-reset, .md-toc-item a { text-decoration: none; }
+.MathJax_SVG, .md-reset { float: none; direction: ltr; }
+:root { --bg-color: #ffffff; --text-color: #333333; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+a.url { word-break: break-all; }
+.in-text-selection, ::selection { background-color: rgb(181, 214, 252); text-shadow: none; background-position: initial initial; background-repeat: initial initial; }
+#write { margin: 0px auto; word-break: normal; word-wrap: break-word; padding-bottom: 70px; overflow-x: visible; }
+.first-line-indent #write p .md-line { text-indent: 0px; }
+.first-line-indent #write li, .first-line-indent #write p, .first-line-indent #write p .md-line:first-child { text-indent: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) { 
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write > blockquote:first-child, #write > div:first-child, #write > ol:first-child, #write > p:first-child, #write > pre:first-child, #write > table:first-child, #write > ul:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+button, input, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0px; -webkit-margin-after: 0px; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.701961); color: rgb(85, 85, 85); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+#write > figure:first-child { margin-top: 16px; }
+figure { overflow-x: auto; margin: -8px 0px 0px -8px; max-width: calc(100% + 16px); padding: 8px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; }
+.CodeMirror-line, .md-fences { break-inside: avoid; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; margin-right: 4px; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+.md-fences { font-size: 0.9rem; display: block; overflow: visible; white-space: pre; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; position: relative !important; background-position: inherit inherit; background-repeat: inherit inherit; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; vertical-align: top; text-shadow: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; background-position: 0px 0px; background-repeat: initial initial; }
+.md-toc-inner, a img, img a { cursor: pointer; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+@media print { 
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid-page; break-before: avoid-page; }
+  #write { margin-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; break-after: avoid-page; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0px; }
+}
+.footnote-line { white-space: pre-wrap; margin-top: 0.714em; font-size: 0.7em; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; background-position: initial initial; background-repeat: initial initial; }
+p > img:only-child { display: block; margin: auto; }
+.md-line > .md-image:only-child, p > .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+.mathjax-block:not(:empty)::after, .md-toc-content::after, .md-toc::after { display: none; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; }
+.MathJax_SVG, .mathjax-block .MathJax_SVG_Display { text-indent: 0px; max-width: none; max-height: none; min-height: 0px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) { 
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, tt { font-family: var(--monospace); }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: var(--monospace); }
+code { text-align: left; }
+a.md-print-anchor { border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; text-shadow: initial !important; background-position: 0px 0px !important; background-repeat: initial initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0px; position: relative; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: 400; line-height: normal; zoom: 90%; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; min-width: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg, [lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom-width: 0px; }
+
+
+.CodeMirror, .CodeMirror-sizer { position: relative; }
+.CodeMirror.cm-s-inner { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.fences-no-line-wrapping .md-fences .CodeMirror { margin-top: -20px; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-scroll, .cm-s-inner .CodeMirror-activeline-background { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta, .cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error, .cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.CodeMirror { height: auto; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; padding-bottom: 30px; height: 100%; outline: 0px; position: relative; box-sizing: content-box; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; white-space: nowrap; position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; border: none !important; background-position: 0px 0px !important; background-repeat: initial initial !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-width: 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; background-position: 0px 0px; background-repeat: initial initial; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right-width: 30px; border-right-style: solid; border-right-color: transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right-style: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; border-right-style: none; width: 0px; visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background-color: rgb(217, 217, 217); background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror-focused .CodeMirror-selected { background-color: rgb(215, 212, 240); background-position: initial initial; background-repeat: initial initial; }
+.cm-searching { background-color: rgba(255, 255, 0, 0.4); background-position: initial initial; background-repeat: initial initial; }
+@media print { 
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid rgb(0, 0, 0); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; color: infotext; font-family: var(--monospace); overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat no-repeat; }
+.CodeMirror-lint-mark-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg==); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; background-position: center center; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-multiple { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC); width: 100%; height: 100%; background-position: right bottom; background-repeat: no-repeat no-repeat; }
+
+
+html {overflow-x: initial !important;}.CodeMirror { height: auto; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror pre { }
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background-color: white; }
+.CodeMirror-gutters { border-right-width: 1px; border-right-style: solid; border-right-color: rgb(221, 221, 221); background-color: rgb(247, 247, 247); white-space: nowrap; }
+.CodeMirror-linenumbers { }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.CodeMirror div.CodeMirror-cursor { border-left-width: 1px; border-left-style: solid; border-left-color: black; z-index: 3; }
+.CodeMirror div.CodeMirror-secondarycursor { border-left-width: 1px; border-left-style: solid; border-left-color: silver; }
+.CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor { width: auto; border: 0px; background-color: rgb(119, 238, 119); z-index: 1; background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror div.CodeMirror-cursor.CodeMirror-overwrite { }
+.cm-tab { display: inline-block; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(217, 79, 138); }
+.cm-s-typora-default pre.cm-header1:not(.cm-atom) :not(.cm-overlay) { font-size: 2rem; line-height: 2rem; }
+.cm-s-typora-default pre.cm-header2:not(.cm-atom) :not(.cm-overlay) { font-size: 1.4rem; line-height: 1.4rem; }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(149, 132, 134); }
+.cm-s-typora-default .cm-table-row, .cm-s-typora-default .cm-block-start { font-family: monospace; }
+.cm-s-typora-default .cm-comment, .cm-s-typora-default .cm-code { color: rgb(74, 90, 159); font-family: monospace; }
+.cm-s-typora-default .cm-tag { color: rgb(169, 68, 66); }
+.cm-s-typora-default .cm-string { color: rgb(126, 134, 169); }
+.cm-s-typora-default .cm-link { color: rgb(196, 122, 15); text-decoration: underline; }
+.cm-s-typora-default .cm-variable-2, .cm-s-typora-default .cm-variable-1 { color: inherit; }
+.cm-s-typora-default .cm-overlay { font-family: monospace; }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left-width: 3px; border-left-style: solid; border-left-color: rgb(228, 98, 154); }
+.cm-s-typora-default .CodeMirror-activeline-background { left: -60px; right: -30px; background-color: rgba(204, 204, 204, 0.2); background-position: initial initial; background-repeat: initial initial; }
+.cm-s-typora-default .CodeMirror-gutters { border-right-style: none; background-color: inherit; }
+.cm-s-typora-default .cm-trailing-space-new-line::after, .cm-startspace::after, .cm-starttab .cm-tab::after { content: '•'; position: absolute; left: 0px; opacity: 0; font-family: LetterGothicStd, monospace; }
+.os-windows .cm-startspace::after, .os-windows .cm-starttab .cm-tab::after { left: -0.1em; }
+.cm-starttab .cm-tab::after { content: ' '; }
+.cm-startspace, .cm-tab, .cm-starttab, .cm-trailing-space-a, .cm-trailing-space-b, .cm-trailing-space-new-line { font-family: monospace; position: relative; }
+.cm-s-typora-default .cm-trailing-space-new-line::after { content: '↓'; opacity: 0.3; }
+.cm-s-inner .cm-keyword { color: rgb(114, 103, 198); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 136, 213); }
+.cm-s-inner .cm-variable { color: black; }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: black; }
+.cm-s-inner .cm-operator { color: rgb(209, 58, 130); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(163, 170, 177); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: #0088d5; }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 136, 213); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: bold; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: rgb(255, 0, 0); }
+.cm-invalidchar { color: rgb(255, 0, 0); }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; margin-right: -30px; padding-bottom: 30px; padding-right: 30px; height: 100%; outline: none; position: relative; box-sizing: content-box; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background-image: none !important; border: none !important; background-position: initial initial !important; background-repeat: initial initial !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-top-left-radius: 0px; border-top-right-radius: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-width: 0px; background-color: transparent; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right-width: 30px; border-right-style: solid; border-right-color: transparent; width: -webkit-fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right-style: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-widget { }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right-style: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background-color: rgb(217, 217, 217); background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror-focused .CodeMirror-selected { background-color: rgb(215, 212, 240); background-position: initial initial; background-repeat: initial initial; }
+.cm-searching { background-color: rgba(255, 255, 0, 0.4); background-position: initial initial; background-repeat: initial initial; }
+.CodeMirror span { }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid black; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; color: infotext; font-family: monospace; overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; -webkit-transition: opacity 0.4s; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: 0% 100%; background-repeat: repeat no-repeat; }
+.CodeMirror-lint-mark-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg==); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; background-position: 50% 50%; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: 0% 0%; background-repeat: no-repeat no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII=); }
+.CodeMirror-lint-marker-multiple { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC); width: 100%; height: 100%; background-position: 100% 100%; background-repeat: no-repeat no-repeat; }
+
+
+:root { --bg-color: rgb(255, 255, 255); --text-color: rgb(51, 51, 51); --code-block-bg-color: inherit; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-size: 1rem; line-height: 1.42857143; overflow-x: hidden; background-image: inherit; background-size: inherit; background-attachment: inherit; background-origin: inherit; background-clip: inherit; background-color: inherit; background-position: inherit inherit; background-repeat: inherit inherit; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { background-color: rgb(181, 214, 252); text-shadow: none; background-position: initial initial; background-repeat: initial initial; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: visible; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > p:first-child, #write > ul:first-child, #write > ol:first-child, #write > pre:first-child, #write > blockquote:first-child, #write > div:first-child, #write > table:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: left; }
+input, button, select, textarea { color: inherit; font-family: inherit; font-size: inherit; font-style: inherit; font-variant-caps: inherit; font-weight: inherit; line-height: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+::before, ::after, * { box-sizing: border-box; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.typora-export p { white-space: normal; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: bold; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.701961); color: rgb(85, 85, 85); border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; margin: 4px 0px 0px; }
+figure { max-width: 100%; overflow-x: auto; margin: 0px; }
+tr { page-break-inside: avoid; page-break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; page-break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right-width: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; page-break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: var(--code-block-bg-color); position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.CodeMirror-line { page-break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background-color: transparent; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; background-position: initial initial; background-repeat: initial initial; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li p, li .mathjax-block { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; }
+@media print {
+  html, body { border: 1px solid transparent; height: 99%; page-break-after: avoid; page-break-before: avoid; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { page-break-after: avoid; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; padding-bottom: 0px; page-break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0mm; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; vertical-align:left;}
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background-color: rgb(204, 204, 204); display: block; overflow-x: hidden; background-position: initial initial; background-repeat: initial initial; }
+p > img:only-child { display: block; margin: auto; vertical-align:left; }
+p .md-image:only-child { display: inline-block; width: 100%; text-align: center; vertical-align:left }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: none; box-shadow: none; }
+.task-list { list-style-type: none; }
+.task-list-item { position: relative; padding-left: 1em; }
+.task-list-item input { position: absolute; top: 0px; left: 0px; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc::after, .md-toc-content::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: bold; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: '.'; }
+.md-tag { opacity: 0.5; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: monospace; }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border: none !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: none !important; background-color: transparent !important; text-shadow: initial !important; background-position: initial initial !important; background-repeat: initial initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0em; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: normal; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { -webkit-transition: none; transition: none; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; }
+
+
+:root {
+  --side-bar-bg-color: #f9fafb;
+  --text-color: #2c3f51;
+  --item-hover-bg-color: #eee8d5;
+  --window-border: 1px solid #93a1a1;
+  --active-file-bg-color: #f9fafb;
+  --active-file-text-color: #93a1a1;
+  --item-hover-text-color: #2c3f51;
+}
+
+@include-when-export url(http://fonts.googleapis.com/css?family=Roboto+Mono:400italic,700italic,700,400&subset=latin,latin-ext);
+
+@font-face {
+  font-family: 'Mononoki';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Mononoki Regular'), url('file:///Users/liubo/Library/Application%20Support/abnerworks.Typora/themes/solarized/mononoki-regular.woff') format('woff')
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  font-style: italic;
+  font-weight: normal;
+  src: local('Mononoki Italic'), url('file:///Users/liubo/Library/Application%20Support/abnerworks.Typora/themes/solarized/mononoki-italic.woff') format('woff')
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  font-style: normal;
+  font-weight: bold;
+  src: local('Mononoki Bold'), url('file:///Users/liubo/Library/Application%20Support/abnerworks.Typora/themes/solarized/mononoki-bold.woff') format('woff')
+}
+
+@font-face {
+  font-family: 'Mononoki';
+  font-style: italic;
+  font-weight: bold;
+  src: local('Mononoki Bold Italic'), url('file:///Users/liubo/Library/Application%20Support/abnerworks.Typora/themes/solarized/mononoki-bolditalic.woff') format('woff')
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: Menlo, Consolas, Mononoki, "Roboto Sans", "Liberation Mono", monospace;
+  color: #2c3f51;
+  line-height: 1.6;
+  background-color: #f9fafb;
+}
+
+#write {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 20px 30px 40px 30px;
+  padding-top: 20px;
+  padding-bottom: 100px;
+}
+
+#write > ul:first-child,
+#write > ol:first-child {
+  margin-top: 30px;
+}
+
+body > *:first-child {
+  margin-top: 0 !important;
+}
+
+body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+a {
+  color: #268bd2;
+}
+a:hover {
+  color: #cb4b16;
+}
+
+.md-toc-inner {
+  /*color: #93a1a1!important;*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  position: relative;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: normal;
+  line-height: 1.4;
+  cursor: text;
+}
+
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+  /*background: url("file:///Users/liubo/Library/Application%20Support/images/modules/styleguide/para.png") no-repeat 10px center;*/
+  text-decoration: none;
+}
+
+h1 tt,
+h1 code {
+  font-size: inherit;
+}
+
+h2 tt,
+h2 code {
+  font-size: inherit;
+}
+
+h3 tt,
+h3 code {
+  font-size: inherit;
+}
+
+h4 tt,
+h4 code {
+  font-size: inherit;
+}
+
+h5 tt,
+h5 code {
+  font-size: inherit;
+}
+
+h6 tt,
+h6 code {
+  font-size: inherit;
+}
+
+h1 {
+  padding-bottom: .3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee8d5;
+}
+
+h2 {
+  padding-bottom: .3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee8d5;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+p,
+ul,
+ol,
+dl,
+table {
+  margin: 0.8em 0;
+}
+
+li > ol,
+li > ul {
+  margin: 0 0;
+}
+
+hr {
+  height: 1px;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #eee8d5;
+  border: 0 none;
+  overflow: hidden;
+  box-sizing: content-box;
+  border-bottom: 1px solid #eee8d5;
+}
+
+/*选择符#container > ul将只选择id为container的div的直接子代ul。它不匹配更深层的li的子代的ul。*/
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h1:first-child + h2 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+body > h3:first-child,
+body > h4:first-child,
+body > h5:first-child,
+body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+a:first-child h1,
+a:first-child h2,
+a:first-child h3,
+a:first-child h4,
+a:first-child h5,
+a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+h1 p,
+h2 p,
+h3 p,
+h4 p,
+h5 p,
+h6 p {
+  margin-top: 0;
+}
+
+li p.first {
+  display: inline-block;
+}
+
+ul,
+ol {
+  padding-left: 30px;
+}
+
+ul:first-child,
+ol:first-child {
+  margin-top: 0;
+}
+
+ul:last-child,
+ol:last-child {
+  margin-bottom: 0;
+}
+
+blockquote {
+  border-left: 4px solid #a3aab1;
+  padding: 0 15px;
+  color: #364859;
+  background: #ebf2f9;
+  font-size: 0.9em;
+  font-family: "Menlo", "Courier New", "Source Code Pro";
+}
+
+blockquote blockquote {
+  padding-right: 0;
+}
+
+table {
+  padding: 0;
+  word-break: initial;
+}
+
+table tr {
+  border-top: 1px solid #cccccc;
+  margin: 0;
+  padding: 0;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+table tr th {
+  font-weight: bold;
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+table tr td {
+  border: 1px solid #cccccc;
+  text-align: left;
+  margin: 0;
+  padding: 6px 13px;
+}
+
+table tr th:first-child,
+table tr td:first-child {
+  margin-top: 0;
+}
+
+table tr th:last-child,
+table tr td:last-child {
+  margin-bottom: 0;
+}
+
+.CodeMirror-gutters {
+  border-right: 1px solid #ddd;
+}
+
+.md-fences,
+code,
+tt {
+  background-color: #efefef;
+  color: #5f6268;
+  border-radius: 3px;
+  padding: 0;
+  font-family: Menlo, Consolas, Mononoki, "Roboto Mono", "Liberation Mono", Courier, monospace;
+  padding: 2px 4px 0px 4px;
+  font-size: 0.9em;
+}
+
+.md-fences {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  padding: 0.2em 1em;
+  padding-top: 8px;
+  padding-bottom: 6px;
+}
+
+.task-list {
+  padding-left: 0;
+}
+
+.task-list-item {
+  padding-left: 32px;
+}
+
+.task-list-item input {
+  top: 3px;
+  left: 8px;
+}
+
+@media screen and (min-width: 914px) {
+  /*body {
+      width: 854px;
+      margin: 0 auto;
+  }*/
+}
+
+@media print {
+  html {
+    font-size: 13px;
+  }
+  table,
+  pre {
+    page-break-inside: avoid;
+  }
+  pre {
+    word-wrap: break-word;
+  }
+}
+
+.md-fences {
+  background-color: #eee8d51a;
+}
+
+#write pre.md-meta-block {
+  padding: 1rem;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border: 0;
+  border-radius: 3px;
+  color: #777777;
+  margin-top: 0 !important;
+}
+
+.mathjax-block > .code-tooltip {
+  bottom: .375rem;
+}
+
+#write > h3.md-focus:before {
+  left: -1.5625rem;
+  top: .375rem;
+}
+
+#write > h4.md-focus:before {
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+
+#write > h5.md-focus:before {
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+
+#write > h6.md-focus:before {
+  left: -1.5625rem;
+  top: .285714286rem;
+}
+
+.md-image > .md-meta {
+  border-radius: 3px;
+  font-family: Consolas, Mononoki, "Roboto Mono", "Liberation Mono", Courier, monospace;
+  padding: 8px 16px;
+  font-size: 0.9em;
+  color: inherit;
+  background-color:
+}
+
+.md-tag {
+  color: inherit;
+}
+
+.md-toc {
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar-tabs {
+  border-bottom: none;
+}
+
+#typora-quick-open {
+  background-color: #eee8d5;
+}
+
+#typora-quick-open-item {
+  background-color: #FAFAFA;
+  border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#md-notification:before {
+  top: 10px;
+}
+
+/** focus mode */
+
+.on-focus-mode blockquote {
+  border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header,
+.context-menu,
+.megamenu-content,
+footer {
+  font-family: Consolas, Mononoki, "Roboto Mono", "Liberation Mono", monospace;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state {
+  visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+  background-color: var(--side-bar-bg-color);
+}
+
+
+ .typora-export p, .typora-export .footnote-line {white-space: normal;} 
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-mac'><h1><a name='header-n0' class='md-header-anchor '></a>linux内存管理</h1><h2><a name='header-n2' class='md-header-anchor '></a>Linux虚拟地址空间布局</h2><p><img src='270929306664122.jpg' alt='img' referrerPolicy='no-referrer' /></p><p>从进程的数据结构来看：</p><p><img src='ldw-process-mem.png' alt='test' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><p>整个虚拟地址空间都可以看做一个映射，对应着有文件的（比如BSS，Data, Text)成为文件映射，没有对应的文件映射的成为匿名映射。</p><blockquote><p>note： 不论对于文件映射还是虚拟内存到物理内存的映射都是采用的写时复制技术，只有真正产生了访问了，触发了缺页异常才会加载到内存当中。所以对于一个100M的可执行文件，这个可执行文件顺便调用了外部200M的so库，它启动后在内存中的占用显然不300M，不然就很sb了。</p></blockquote><p>参考： </p><p><a href='http://www.cnblogs.com/clover-toeic/p/3754433.html'>Linux虚拟地址空间布局</a></p><p><a href='http://luodw.cc/2016/02/17/linux-memory'>linux内核内存管理</a></p><p>&nbsp;</p><h2><a name='header-n24' class='md-header-anchor '></a>Linux虚拟地址到物理地址的映射（页表）</h2><p>参考：</p><p><a href='http://blog.csdn.net/gatieme/article/details/52402861'>Linux分页机制之概述--Linux内存管理</a></p><p><a href='https://www.jianshu.com/p/ad66092e611b'>腾讯后台开发工程师谈：Linux内存管理</a></p><ol start='' ><li>linux kenel中会维护一个页表映射，这个映射是通过5级寻址来实现的。（为什么不使用数组，而是使用多级寻址，见上面的参考文章。）</li><li>对于计算机来说，寻址是非常普遍的操作，这对cpu来说是庞大的开销。于是进化出了专业针对虚拟地址到物理地址转换的硬件单元 MMU, TLB.</li><li>TLB是为了保存虚拟地址和物理地址映射关系的缓存，对于经常访问的虚拟地址，没有必要每次都重新计算。</li></ol><p>&nbsp;</p><h2><a name='header-n43' class='md-header-anchor '></a>top命令含义</h2><blockquote><p>PID USER PR NI VIRT RES SHR S %CPU %MEM TIME+ COMMAND</p><p>2120 kgregory 20 0 4373m 15m 7152 S 0 0.2 0:00.10 java</p><ul><li>VIRT is the virtual memory space: the sum of everything in the virtual memory map (see below). It is largely meaningless, except when it isn&#39;t (see below).</li><li>RES is the resident set size: the number of pages that are currently resident in RAM. In almost all cases, this is the only number that you should use when saying &quot;too big.&quot; But it&#39;s still not a very good number, especially when talking about Java.</li><li>SHR is the amount of resident memory that is shared with other processes. For a Java process, this is typically limited to shared libraries and memory-mapped JARfiles. In this example, I only had one Java process running, so I suspect that the 7k is a result of libraries used by the OS.</li><li>SWAP isn&#39;t turned on by default, and isn&#39;t shown here. It indicates the amount of virtual memory that is currently resident on disk, whether or not it&#39;s actually in the swap space. The OS is very good about keeping active pages in RAM, and the only cures for swapping are (1) buy more memory, or (2) reduce the number of processes, so it&#39;s best to ignore this number. </li></ul></blockquote><p>&nbsp;</p><p>从vpn-host上随便找个程序：</p><p><img src='image-20180517143526079.png' alt='image-20180517143526079' referrerPolicy='no-referrer' /></p><p>从上面可以看出：</p><ul><li><p>所有的动态库在虚拟内存中都有映射。</p></li><li><p>对于fcntlmodule来说，存在两个项。两个项目相加即为fntlmodule.so的真实大小</p><p>-r-xr-xr-x 1 root root 14K  8月 18 2016 /usr/lib/python2.6/lib-dynload/fcntlmodule.so</p></li></ul><p>top的结果：</p><p><img src='image-20180517144138031.png' alt='image-20180517144138031' referrerPolicy='no-referrer' /></p><p>pmap中所有的值是否等于VIRT呢? 验证结果是相等的</p><p><img src='image-20180517144656661.png' alt='image-20180517144656661' referrerPolicy='no-referrer' /></p><h2><a name='header-n87' class='md-header-anchor '></a>GLIBC malloc 实现分析</h2><blockquote><p>现在glibc里malloc的实现，主要通过三种方法分配内存给用户层。</p><ol start='' ><li>内部管理的内存块链表。大小满足应用层分配请求时使用。好处是不需要系统调用，在用户态实现。</li><li>brk系统调用。当malloc内部内存不够用，需要向内核申请内存。brk系统调用增大堆顶位置，但是只是虚拟内存。真正使用时会page fault进而真正得到内存。</li><li>mmap系统调用。malloc实现有一个问题是只有当堆顶空闲内存区大于128K，内存才真正free还给内核。mmap(匿名映射)会在堆顶与栈底之间的shared libs、files区域给应用一个线性区，也是虚拟内存。好处是munmap的时候，内存是真的还给内核。</li></ol><p>malloc希望频繁申请而量小的请求能够在用户态完成，也就是方法1。</p><p>在malloc里，对于brk和mmap，默认超过128K用mmap，否则用brk。</p><p>Brk获得的内存可以给方法1复用，而mmap只能应用自己管理。频繁的mmap和munmap系统调用、用户态与内核态切换以及pagefault开销是很大的。</p></blockquote><p>&nbsp;</p><h2><a name='header-n109' class='md-header-anchor '></a>TCMalloc 实现分析</h2><p><a href='https://zhuanlan.zhihu.com/p/29216091'>图解TCMalloc</a> golang中自己实现一套tcmalloc的实现；</p><p><a href='http://goog-perftools.sourceforge.net/doc/tcmalloc.html'>TCMalloc : Thread-Caching Malloc</a></p><p>TCMalloc 相对于malloc的优点：</p><p>&nbsp;</p><h1><a name='header-n118' class='md-header-anchor '></a>linux文件管理</h1><h2><a name='header-n119' class='md-header-anchor '></a>虚拟文件系统</h2><p><a href='https://blog.csdn.net/freeking101/article/details/78223455'>linux文件系统详解</a></p><p>&nbsp;</p><p><img src='image-20180425165716332.png' alt='image-20180425165716332' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><p><img src='image-20180426104547721.png' alt='image-20180426104547721' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><p>查看系统调用表：</p><p><a href='https://blog.csdn.net/sinat_26227857/article/details/44244433'>linux系统调用表</a></p><p>&nbsp;</p><p>fd -&gt; struct *file -&gt; inode -&gt; 文件实体</p><ol start='' ><li><p>通过fd是如何找到struct *file的？</p><ul><li>没有运行的进程都保持一个struct *file 的数组，fd就是这个数组的下标，即通过fd可以直接寻址struct *file;</li></ul><p><img src='image-20180426144440782.png' alt='image-20180426144440782' referrerPolicy='no-referrer' /></p></li><li><p>通过struct *file如何找到这个文件的inode？</p></li></ol><p>​    函数调用中是在open的时候，就放到struct *file, 中间的调用层次很深；要查找的数据结构是在内核中的，不是属于某一个进程；</p><p>了解了以上两点：</p><ol start='' ><li>写操作是系统调用，由内核负责的原子操作，所以不会出现相互交叉的情况，比如“AAAA&quot;, &quot;BBBB&quot;, 写入的文件不会出现”AABBAABB&quot;的情况，但是写是可以相互覆盖的；</li><li>两个不同的fd指向同一个文件（不同进程打开）</li></ol><ul><li>write的时候如果存在lseek操作，可能写之间会相互覆盖。</li><li>如果要避免上述情况的发生，则采用O_APPEND的方式</li></ul><ol start='' ><li><p>同一个进程，多线程使用同一个fd</p><p>只有一个文件表项，也就是只有一个文件偏移量，如果不需要调用lseek()后再调用read()/write()，那么并没有数据冲突的危险; 如果存在lseek的情况，同情况1；</p><p>​</p></li></ol><h2><a name='header-n179' class='md-header-anchor '></a>页高速缓存和页回写</h2><p>如何设计这样的缓存？</p><p><strong>缓存的时机是什么</strong></p><p>缓存 -&gt; 磁盘</p><p>有三种解决方案：</p><ul><li>不做缓存，直接写入磁盘。这样效率无疑是非常低的。</li><li>写透缓存。自动更新内存缓存，同时更新磁盘文件。</li><li>回写。更新缓存，并把页面标记为脏，加入到脏页链表当中，然后由一个进程周期性写回到磁盘中。（读的时候，直接降其读出来就行了）</li></ul><p><strong>缓存的退出机制是怎样的</strong></p><ul><li>最近最少使用（已经不错了，还是有缺陷，比如有的人只加载了一次就不用了）</li><li>双链策略；（活跃缓存和非活跃缓存，向上面那种情况，只有一次放入到非活跃链表中）</li></ul><p>&nbsp;</p><h2><a name='header-n209' class='md-header-anchor '></a>mmap</h2><p>参考：</p><p><a href='http://www.cnblogs.com/huxiao-tee/p/4660352.html'>认真分析mmap：是什么 为什么 怎么用</a></p><p><strong>mmap是干什么的</strong></p><p>mmap是一中内存映射文件的方法，即将一个文件或者其它对象映射到进程空间，实现文件磁盘地址和进程虚拟地址空间一一映射的关系。</p><p><img src='image-20180410163155420.png' alt='image-20180410163155420' referrerPolicy='no-referrer' /></p><p><strong>kernel 映射过程</strong></p><ul><li><p>当前进程的地址空间中，寻找一段空闲的，满足要求的虚拟区。</p></li><li><p>分配一个vm_area_struct来描述和管理这段内存区域，并vm_area_struct插入到进程的虚拟地址区域链表或者树中。</p></li><li><p>使用下面的函数，把“文件”和”内存“关联起来</p><blockquote><p>int mmap(struct file *filp, struct vm_area_struct *vma)</p></blockquote><p>注意这个时候，虚拟地址并没有任何数据关联到主存中。实际上“物理磁盘” -&gt; &quot;内存&quot;过程还是按需缓存的。</p></li><li><p>进程发起对这篇映射空间的访问，引发缺页异常，实现文件内容到物理内存的拷贝；</p><p>a)进程读写这一段区域 -&gt; 查询页表（没有） -&gt; 缺页异常。b)在swap cache中寻找（没有)-&gt; nopage -&gt; 从磁盘装入到主存中。</p></li></ul><p><strong>与常规文件操作有何优点？</strong></p><ul><li>常规文件操作需要从<code>磁盘操作</code>-&gt;<code>页缓存</code>-&gt;<code>用户主存</code> 两次数据拷贝。而mmap只要<code>磁盘操作</code>-&gt;<code>页缓存</code>两步操作。</li><li>提供进程间共享内存及相互通信的方式。对于父子进程或者亲缘进程，由于可以感知到彼此的虚拟内存区域，都可以将自身用户空间映射到同一个文件或者匿名映射到同一片区域。</li></ul><p><strong>评论</strong></p><ol start='' ><li>linux是否称文件描述符比“句柄”更佳。</li><li>mmap之所以快，是因为建立了页到用户进程的虚地址空间映射，以读取文件为例，避免了页从内核态拷贝到用户态。</li><li>除第2点之外，mmap映射的页和其它的页并没有本质的不同。
+所以得益于主要的3种数据结构的高效，其页映射过程也很高效：
+(1) radix tree，用于查找某页是否已在缓存.
+(2) red black tree ，用于查找和更新vma结构。
+(3) 双向链表，用于维护active和inactive链表，支持LRU类算法进行内存回收。</li><li>mmap不是银弹
+(1) 对变长文件不适合。
+(2) 如果更新文件的操作很多，mmap避免两态拷贝的优势就被摊还，最终还是落在了大量的脏页回写及由此引发的随机IO上。</li></ol><p>所以在随机写很多的情况下，mmap方式在效率上不一定会比带缓冲区的一般写快。</p><ol start='' ><li>之前接触的mongodb版本无法控制对内存的使用，所以当数据比较大时，其内存使用难以控制，一切的内存 -&gt; 页 -&gt; swap 步骤都交给了操作系统，难以进行有效调优。频繁的页swap会让mongodb的优势荡然无从。</li></ol><p>&nbsp;</p><h1><a name='header-n280' class='md-header-anchor '></a>linux进程管理</h1><h2><a name='header-n281' class='md-header-anchor '></a>进程调度</h2><p><strong>进入休眠的事件</strong></p><ul><li>从文件IO读更多的数据</li><li>某个硬件事件</li><li>尝试获取一个已经被占用的内核信号量</li></ul><p><strong>kernel做什么</strong></p><ul><li>进程把自己标记成休眠状态，从可执行的红黑中移出，放入等待队列；（这个等待队列是由链表组成的）</li><li>调用一次schedule(),选择和执行另外一个进程；</li></ul><p><strong>唤醒</strong></p><p>通过函数wake_up()进行，它会唤醒指定的等待队列上的所有进程；</p><p>​    这里可以得出：因为不懂原因导致休眠的进程是放在不同的等待队列中的；</p><p><strong>上下文切换</strong></p><p>当切换运行的进程时，发生上下文切换；做两件事：</p><ul><li>把虚拟内存映射切换到新进程中；</li><li>切换处理器执行相关的周边状态： 保存，恢复栈信息和寄存器信息，还有其他任何与体系结构相关的状态信息； （todo: 如何理解这个体系结构）</li></ul><p><strong>用户抢占</strong></p><p>用户抢占式以下的情况下发生的：</p><ul><li>从系统调用返回用户空间时</li><li>从中断处理程序返回用户空间时</li></ul><p>为什么是上面两种，是否还有其他的场景导致用户抢占；</p><p>linux是支持<strong><code>内核抢占</code></strong>的，但这里不详细展开；</p><p>&nbsp;</p><p><strong>实时调度策略</strong></p><p>linux支持SHCED_FIFO和SCHED_RR两种实时调度策略，</p><p><em>linux何时使用CFS策略，何时使用FIFO和RR策略？</em></p><p>linux进程分为3类： </p><figure><table><thead><tr><th>类型</th><th>描述</th><th>分类</th></tr></thead><tbody><tr><td>交互式进程(interactive process)</td><td>此类进程经常与用户进行交互, 因此需要花费很多时间等待键盘和鼠标操作. 当接受了用户的输入后, 进程必须很快被唤醒, 否则用户会感觉系统反应迟钝</td><td>shell, 文本编辑程序和图形应用程序</td></tr><tr><td>批处理进程(batch process)</td><td>此类进程不必与用户交互, 因此经常在后台运行. 因为这样的进程不必很快相应, 因此常受到调度程序的怠慢</td><td>程序语言的编译程序, 数据库搜索引擎以及科学计算</td></tr><tr><td>实时进程(real-time process)</td><td>这些进程由很强的调度需要, 这样的进程绝不会被低优先级的进程阻塞. 并且他们的响应时间要尽可能的短</td><td>视频，音频应用程序，机器人控制程序以及物理传感器上收集数据的程序。</td></tr></tbody></table></figure><p>&nbsp;</p><p>对于前两者，算是普通进程，linux使用cfs调度；对于实时进程，使用实时算法FIFO Robin； （todo: 至于kernel怎样把两种算法一起调度的，以及采用怎样的数据结构，这些细节暂不研究）</p><p>各种调度算法的调度优先级别：</p><blockquote><p>stop_sched_class -&gt; dl_sched_class -&gt; rt_sched_class -&gt; fair_sched_class -&gt; idle_sched_class</p></blockquote><p>&nbsp;</p><h2><a name='header-n373' class='md-header-anchor '></a>系统调用</h2><p><a href='http://blog.51cto.com/noican/1361087'>硬中断与软中断的区别</a></p><blockquote><p>系统调用中用到的底层原理就是软中断，看上面软中断和硬中断的区别； 软中断不能中断cpu，而且只能在当前正在运行的程序中产生；</p></blockquote><p>软中断是一种需要内核为正在运行的进程去做一些事情（通常为I/O）的请求。有一个特殊的软中断是Yield调用，它的作用是请求内核调度器去查看是否有一些其他的进程可以运行。</p><p>注意上面的话： </p><ul><li>软中断一般不会引起进程调度的切换，可能只是cpu/寄存器的切换；Yield是可以一起进程切换的； </li></ul><p><strong>系统调用的上下文</strong></p><p>系统调用的上下文是处于中断进程的上下文中</p><p><strong>系统调用返回</strong></p><p>参数个数为N的系统调用由_syscallN()负责格式转换和参数传递。系统调用号放入EAX寄存器，启动INT 0x80后，规定返回值送EAX寄存器。</p><blockquote><p>为防止和正常的返回值混淆，系统调用并不直接返回错误码，而是将错误码放入一个名为errno的全局变量中。通常用一个负的返回值来表明错误。返回一个0值通常表明成功。</p></blockquote><p>&nbsp;</p><h2><a name='header-n400' class='md-header-anchor '></a>中断和中断处理</h2><p><strong>如何理解中断和异常</strong></p><ul><li>中断使得硬件发出通知给CPU，不同的硬件中断对应的中断处理号不一样；</li><li>异常也称为同步中断；（因为它的处理方式跟中断非常像，逻辑上可认为是中断的一种）</li></ul><p><strong>异常是如何产生的</strong></p><p>在cpu执行到由于编程失误而导致的错误指令，或者执行期间出现特殊情况（如缺页），必须由内核处理的时候，cpu就产生一个异常；</p><p>&nbsp;</p><p><strong>中断处理程序</strong></p><ul><li>Linux就是普通的C函数，只不过需要按照特定的类型声明，以便以标准的方式传递程序处理信息；</li><li>它的不同在于，中断处理程序运行在中断上下文中。</li></ul><p>中断上下文中是不可以嵌套，不可以调用导致睡眠的函数（无法唤醒）</p><p><strong>中断上半步</strong></p><ol start='' ><li>上半步只执行有严格时限的工作，如应答和复位硬件，把网卡中的数据转到系统内存。</li></ol><p><strong>中断下半部</strong></p><p>&nbsp;</p><p>&nbsp;</p><h2><a name='header-n439' class='md-header-anchor '></a>内核同步</h2><p><strong>并发执行是怎样造成的</strong></p><ol start='' ><li>真并发，多个处理器可以同时处理临界区域的数据；</li><li>伪并发，单核多线程中，一个线程处于临界区时，可以随时被非自愿的抢占；如果抢占程序（比如信号处理程序）也操作了这块临界区域，那么同样会形成竞争条件。</li></ol><p><strong>内核中存在的抢占</strong></p><ol start='' ><li>中断</li><li>软中断和tasklet</li><li>内核抢占（比如CFS进程执行切换）</li><li>睡眠及用户空间同步</li><li>对称多处理 =&gt; 两个或者多个处理器同时处理代码可以同时执行代码</li></ol><p><strong>锁的粒度多大才合适</strong></p><ol start='' ><li>过大： 比如一个大的链表的数据结构，如果只用一个锁，争用会非常厉害，导致性能降低；</li><li>过小： 每一个链表节点都搞一个锁，在大规模的SMP机器上执行的很好。但在双核处理器上，争用不明显，白白增加系统开销；</li></ol><p>&nbsp;</p><h2><a name='header-n478' class='md-header-anchor '></a>内核同步方法</h2><p><strong>原子操作</strong></p><p>注意“原子性”跟“顺序性”的差异，原子操作只保证原子性，顺序性通过”屏障“（barrier)指令来实施。</p><p><strong>自旋锁</strong></p><p>如果一个执行线程试图获得一个已经被持有的自旋锁，那么该线程就一直忙循环，等待锁重新可用。 -&gt; 设计的初衷是短时间内进行轻量级的加锁。</p><ul><li>与之对应的是唤醒锁。让请求线程睡眠，直到锁重新可用时再唤醒它。优点就是处理器不用等待，可以去执行其它代码，负面作用是这里有明显的两次上下文切换，被阻塞的线程要换出和换入。</li><li>在中断处理程序中使用spin_lock时，一定要先禁止中断。spin_lock是非递归的。</li><li>持有自旋锁是不允许睡眠的。</li></ul><p><strong>信号量</strong></p><blockquote><p>Linux中的信号量是一种睡眠锁。如果有任务试图获取一个不可用（已经被占用）的信号量时，信号量会将其推进一个等待队列，然后让其睡眠。这时处理器重获自由，从而去执行其他代码。当持有的信号量可用后，处于等待队列中的那个任务呗唤醒，并获得该信号量。</p></blockquote><p>等待队列中任务的是指什么，进程？</p><p>-&gt; 防止每次都睡眠</p><p><strong>二值信号量</strong></p><p>在同一个时刻仅允许有一个锁持有者，这时的计数等于1。</p><p><strong>多值信号量</strong></p><p>它允许在一个时刻至多有count个锁持有者，计数信号量不能用来进行强制互斥，因为它允许多个线程同时访问临界区。</p><p><em>一般用来做任务对列时使用</em></p><p><strong>读写信号量</strong></p><p><strong>互斥体</strong></p><p>也就是我们常用的锁；一种更简单的睡眠锁；（todo: 简单具体体现在哪里，难道只是外在的使用上，还是内在的实现上?)</p><p>一些特性：</p><ul><li>给mutex上锁者必须负责再给其解锁；不能在一个上下文中上锁，而在另一个上下文中解锁；</li><li>不能递归的上锁和解锁；（外面的递归锁的实现是又加了一层封装）</li><li>当持有一个mutex，进程不能退出（是否能够pthread_create?)</li><li>mutex不能在中断或者下半部中使用，即使使用mutex_trylock()也不行。（这一点应该是上面第一点的推论）</li></ul><p>&nbsp;</p><h2><a name='header-n539' class='md-header-anchor '></a>fork与锁安全</h2><p><a href='https://liam0205.me/2017/01/17/fork-safe/'>程序员的自我修养（三）：fork() 安全</a></p><p><a href='https://blog.codingnow.com/2011/01/fork_multi_thread.html'>极不和谐的 fork 多线程程序</a></p><p><img src='image-20180508114547125.png' alt='image-20180508114547125' referrerPolicy='no-referrer' /></p><p>&nbsp;</p><p><strong>fork后都继承了什么？</strong></p><ol start='' ><li>fork只继承了父进程所在的线程，其他的线程没有继承；</li><li>子进程复制了父进程完成的虚拟空间。包括：互斥锁，条件变量，线程内部的对象等，因为这些对象的状态也放在内存中，所以这些对象的状态也被继承过来了。</li></ol><p>以后所有的行为都可以通过以上两点推导出来</p><p><strong>子进程为什么会陷入到死锁中？</strong></p><ol start='' ><li>父进程在fork之前有两个线程，主线程和子线程，子线程持有一个锁（mutex）。</li><li>子进程是从主线程中继承过来的，只有一个线程。子进程同时继承了mutex，这个mutex是一块新的内存对象，可认为mutex2, 而且mutex2的状态是锁定状态。</li><li>子进程尝试对mutex2锁定，陷入到死锁当中。(而且子进程感知不到这个锁的状态，上来就unlock一把，看起来就奇葩。子进程只有知道mutex的lock才能进行操作 -&gt; pthread_atfork()的实现)</li></ol><p><strong>如何解决上面的问题？</strong></p><ol start='' ><li>pthread_atfork()</li><li>fork完毕之后立即执行exec</li></ol><blockquote><p>在多线程程序里使用fork是比较郁闷的事情； 不只是应用层的锁的问题； 很多C库里的函数调用也会出现死锁线程； 最好的办法是在多线程进程里不是用fork； 如果非使用不可，尽量fork完毕后直接exec，不调用任何其他除了fork之外的函数； exec可以覆盖内存空间，可以解决所有关于锁的问题</p></blockquote><p>&nbsp;</p><h1><a name='header-n585' class='md-header-anchor '></a>linux定时管理</h1><h2><a name='header-n586' class='md-header-anchor '></a>定时器与时间管理</h2><p><strong>内核中的时间概念</strong></p><p>内核必须在硬件的帮助下才能计算和管理时间。系统定时器以某种频率自行触发时钟中断，该中断可以通过编程设定，称为节拍率（tick rate).</p><p>&nbsp;</p><p>linux2.5之前的节拍率是100， 2.5之后就变成1000了。即每个1ms产生一个时钟中断，那么时钟中断产生后，kernel做些神马事呢？（这个中断是谁产生的，看下面的RTC部分）</p><ul><li>更新系统时间</li><li>更新实际时间</li><li>在smp系统上，均衡调度程序中各处理器上的运行队列</li><li>检查当前进程是否用尽了自己的时间片，如果用尽，重新进行调度。</li><li>运行超时的动态定时器</li><li>更新资源消耗和处理器时间统计值。</li></ul><blockquote><p>如何理解 usleep(10) 这种需求呢，难道每次变成睡眠1ms吗？即系统中微秒级别的定时器是如何实现的?</p><p><a href='http://tldp.org/HOWTO/IO-Port-Programming-4.html'>High-resolution timing</a></p><ul><li>sleep级别的</li></ul><p>sleep usleep 使用的进程级别切换，只能维持10ms级别的准确度；</p><p>现在usleep是使用unsleep实现的，unsleep有改进 -&gt; 前提是设置了<code>sched_setscheduler()</code></p><p>In the 2.0.x series of Linux kernels, there is a new system call, <code>nanosleep()</code> (see the <code>nanosleep(2)</code> manual page), that allows you to sleep or delay for short times (a few microseconds or more).</p><p>For delays &lt;= 2 ms, if (and only if) your process is set to soft real time scheduling (using <code>sched_setscheduler()</code>), <code>nanosleep()</code> uses a busy loop; otherwise it sleeps, just like <code>usleep()</code>.</p><p>&nbsp;</p><ul><li><p>使用中断来实现实现定时器</p><p>Inputting or outputting any byte from/to port 0x80 (see above for how to do it) should wait for almost exactly 1 microsecond independent of your processor type and speed.</p></li><li><p>使用汇编指令来实现时钟级别的定时器</p></li></ul><pre class="md-fences md-end-block" lang=""> <div class="CodeMirror cm-s-inner CodeMirror-wrap"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 0px; left: 4px;"></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 0px; margin-bottom: 0px; border-right-width: 30px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: 0px; width: 0px;"></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">Instruction &nbsp; i386 clock cycles &nbsp; i486 clock cycles</span></pre></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">xchg %bx,%bx &nbsp; &nbsp; &nbsp; &nbsp;  3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">nop &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">or %ax,%ax &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">mov %ax,%ax &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></pre><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">add %ax,0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1</span></pre></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; border-bottom-width: 0px; border-bottom-style: solid; border-bottom-color: transparent; top: 102px;"></div><div class="CodeMirror-gutters" style="display: none; height: 132px;"></div></div></div></pre></blockquote><p><a href='http://guojing.me/linux-kernel-architecture/posts/time-system/'>时钟和定时器电路</a></p><ul><li><p>实时时钟  RTC </p><blockquote><p>独立于时间CPU和其他芯片，即使当PC被切断电源，RTC依旧继续工作，因为它靠一个小电池或蓄电池供电。CMOS TAM和RTC被继承在一个芯片<a href='http://guojing.me/linux-kernel-architecture/posts/time-system/#fn:1'>1</a>上。</p><p> </p><p>RTC能在IRQ8上发出周期性的中断，频率在2～8192Hz之间，也可以对RTC进行编程以使当RTC到达某个特定的值时激活IRQ8线，也就是作为一个闹钟来工作。</p></blockquote><p>&nbsp;</p></li><li><p>时间戳计时器 TSC gettimeofday就是从TSC中获取的，所以可以统计很短的时间流逝。</p><blockquote><p>所有的80x86微处理器都包含一条CLK输入引线，它接收玩不振荡器的时钟信号。从Pentium开始，80x86微处理器就都包含一个计数器，它在每个时钟信号到来时加1。该计数器是利用64位的时间戳计数器（<em>Time Stamp Counter TSC</em>）寄存器来实现的，可以通过汇编语言指令<em>rdtsc</em>来读这个寄存器。当使用这个寄存器时，内核必须考虑到时钟信号的频率，例如时钟节拍的频率时1GHz，那么时间戳计数器每那庙增加一次。</p></blockquote></li><li><p>PIT Programmable Interval Timer</p></li><li><p>CPU本地计时器</p></li></ul></div>
+</body>
+</html>
